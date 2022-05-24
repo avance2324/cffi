@@ -1,0 +1,4 @@
+. set_path.scr
+pushd python
+python3 test_magic.py
+popd

@@ -1,0 +1,45 @@
+
+
+
+## =====================================================================
+##
+##  function append_pythonpath( <new_path> )
+##
+##    if the <new_path> is not existing, it is appended to PYTHONPATH
+## 
+## ======================================================================
+function append_pythonpath() {
+    new_dir=$(realpath $1)
+    found=0
+    paths=$(echo $PYTHONPATH | tr ":" "\n")
+    echo "new_dir = ${new_dir}"
+    for i in $paths
+    do
+        echo "i = $i"
+        if [[ $i == ${new_dir} ]];
+        then
+            found=1
+        fi
+    done
+    echo "found = $found"
+    if [[ $found == 0 ]] ;
+    then
+        export PYTHONPATH=$PYTHONPATH:${new_dir}
+        printf "new path added: ${new_dir}\n"
+    else
+        printf "path exists: ${new_dir}\n"
+    fi
+}
+
+## ===========================================================================
+## append to PYTHONPATH 
+## ===========================================================================
+append_pythonpath  ./cffi
+
+
+
+
+
+
+
+

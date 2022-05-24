@@ -1,0 +1,49 @@
+## usage:  source  set_path.scr
+
+
+## =====================================================================
+##  
+##  function append_pythonpath( <new_path> <env_var> )
+##
+##    if the <new_path> is not existing, it is appended to <env_var>
+## 
+## ======================================================================
+function append_pythonpath() {
+    new_dir=$(realpath $1)
+    env_var=$2
+    found=0
+    paths=$(echo ${!env_var} | tr ":" "\n")
+    echo "new_dir = ${new_dir}"
+    for i in $paths
+    do
+        echo "i = $i"
+        if [[ $i == ${new_dir} ]];
+        then
+            found=1
+        fi
+    done
+    echo "found = $found"
+    if [[ $found == 0 ]] ;
+    then
+        export ${env_var}=${!env_var}:${new_dir}
+        printf "new path added to ${env_var}: ${new_dir}\n"
+    else
+        printf "path exists in ${env_var}: ${new_dir}\n"
+    fi
+}
+
+## ===========================================================================
+## append to environment variables
+## ===========================================================================
+append_pythonpath  ./cffi/  "PYTHONPATH"
+append_pythonpath  ./c/build/ "PYTHONPATH"
+
+append_pythonpath  ./c/build/ "LD_LIBRARY_PATH"
+
+##export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:$(realpath ./c/build/)
+
+
+
+
+
+

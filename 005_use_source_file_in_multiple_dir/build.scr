@@ -1,0 +1,4 @@
+pushd cffi
+python3 build_wrapper_magic.py
+popd
+

@@ -1,0 +1,7 @@
+rm -fr *.so
+rm -fr cffi/*.so
+rm -fr cffi/__pycache__
+rm -fr cffi/*.c
+rm -fr cffi/*.o
+rm -fr c/*.o
+rm -fr c/build/*

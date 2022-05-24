@@ -1,0 +1,21 @@
+echo -e "\e[0;49;93m"
+echo "==============================================="
+echo "Step-1 build share library for c code ... "
+echo "==============================================="
+echo -e "\e[0m"
+echo ""
+pushd c/build
+cmake ../ && make 
+popd
+
+echo -e "\e[0;49;93m"
+echo "==============================================="
+echo "Step-2 build cffi wrapper on .so of step-1... "
+echo "==============================================="
+echo -e "\e[0m"
+
+pushd cffi
+python3 build_wrapper_magic.py
+ls *.so
+popd
+
